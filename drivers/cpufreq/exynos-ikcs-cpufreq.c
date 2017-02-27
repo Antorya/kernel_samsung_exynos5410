@@ -852,16 +852,16 @@ static struct global_attr cpufreq_min_limit =
 static struct global_attr cpufreq_max_limit =
 		__ATTR(cpufreq_max_limit, S_IRUGO | S_IWUSR, show_max_freq, store_max_freq);
 
-static struct attribute *iks_attributes[] = {
+static struct attribute *ikcs_attributes[] = {
 	&freq_table.attr,
 	&min_freq.attr,
 	&max_freq.attr,
 	NULL
 };
 
-static struct attribute_group iks_attr_group = {
-	.attrs = iks_attributes,
-	.name = "iks-cpufreq",
+static struct attribute_group ikcs_attr_group = {
+	.attrs = ikcs_attributes,
+	.name = "ikcs-cpufreq",
 };
 
 /************************** sysfs end ************************/
@@ -1129,7 +1129,7 @@ static int __init exynos_cpufreq_init(void)
 	pm_qos_add_request(&min_cpu_qos, PM_QOS_CPU_FREQ_MIN, freq_min[CA7]);
 	pm_qos_add_request(&max_cpu_qos, PM_QOS_CPU_FREQ_MAX, freq_max[CA15]);
 
-	ret = sysfs_create_group(cpufreq_global_kobject, &iks_attr_group);
+	ret = sysfs_create_group(cpufreq_global_kobject, &ikcs_attr_group);
 	if (ret) {
 		pr_err("%s: failed to create iks-cpufreq sysfs interface\n", __func__);
 		goto err_cpufreq;
