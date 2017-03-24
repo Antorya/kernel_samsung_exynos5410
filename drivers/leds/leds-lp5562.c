@@ -132,23 +132,23 @@ static struct leds_control {
 	u8 	current_high;
 	int	blink_retention;
 	int	blink_delay;
-	bool	blink_fading;
+	int	blink_fading;
 	int	fade_in_time;
 	int	fade_out_time;
 	u8	r;
 	u8	g;
 	u8	b;
 } ledc = {
-	.current_low = 5,
+	.current_low = 20,
 	.current_high = 40,
-	.blink_retention = 350,
-	.blink_delay = 3250,
-	.blink_fading = true,
+	.blink_retention = 100,
+	.blink_delay = 800,
+	.blink_fading = 0, /* 0=false 1=true (default=0) */
 	.fade_in_time = 300,
-	.fade_out_time = 1300,
-	.r = 0,
-	.g = 0,
-	.b = 254,
+	.fade_out_time = 600,
+	.r = 64,
+	.g = 224, /* Default color=turquoise */
+	.b = 208,
 };
 
 static const struct lp5562_wait_param lp5562_wait_cycle[LP5562_CYCLE_MAX] = {
