@@ -12,7 +12,7 @@ BUILDVER=STABLE
 CPU=`grep -c ^processor /proc/cpuinfo`
 DIR=`readlink -f .`
 
-echo ""; ccache -cs; echo ""; arm-eabi-gcc --version
+echo ""; ccache -cs; echo ""; arm-linux-gnueabihf-gcc --version
 
 echo "e.q.: |0.1|-|2.3|-|4.5|"
 echo -ne "Ver.Num.: "; read NUM
@@ -52,7 +52,7 @@ if [ -f arch/arm/boot/zImage ]; then
   mv arch/arm/boot/zImage $IMAGES/zImage-LOS-$BUILDVER-$NUM
   find $LOSMODULES/ -name "*.ko" -exec rm -rf {} \;
   find $DIR -name "*.ko" -exec mv {} $LOSMODULES/ \;
-  arm-eabi-strip --strip-unneeded $LOSMODULES/*.ko
+  arm-linux-gnueabihf-strip --strip-unneeded $LOSMODULES/*.ko
     if [ -f $IMAGES/zImage-LOS-$BUILDVER-$NUM ]; then
       make mrproper
     fi;
@@ -65,7 +65,7 @@ if [ -f arch/arm/boot/zImage ]; then
   mv arch/arm/boot/zImage $IMAGES/zImage-TW-$BUILDVER-$NUM
   find $TWMODULES/ -name "*.ko" -exec rm -rf {} \;
   find $DIR -name "*.ko" -exec mv {} $TWMODULES/ \;
-  arm-eabi-strip --strip-unneeded $TWMODULES/*.ko
+  arm-linux-gnueabihf-strip --strip-unneeded $TWMODULES/*.ko
     if [ -f $IMAGES/zImage-TW-$BUILDVER-$NUM ]; then
       make mrproper
     fi;
