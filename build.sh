@@ -41,7 +41,6 @@ else
 fi
 }
 
-LOSMODULES=~/Desktop/LOS-MODULES
 TWMODULES=~/Desktop/TW-MODULES
 IMAGES=~/Desktop/IMAGES
 
@@ -50,9 +49,6 @@ find $IMAGES/ -name "*zImage*" -exec rm -rf {} \;
 ( echo "--LOS zImage--"; BUILDLOS ) 2>&1 | tee -a kernel.log;
 if [ -f arch/arm/boot/zImage ]; then
   mv arch/arm/boot/zImage $IMAGES/zImage-LOS-$BUILDVER-$NUM
-   find $LOSMODULES/ -name "*.ko" -exec rm -rf {} \;
-   find $DIR -name "*.ko" -exec mv {} $LOSMODULES/ \;
-   arm-linux-gnueabi-strip --strip-unneeded $LOSMODULES/*.ko
     if [ -f $IMAGES/zImage-LOS-$BUILDVER-$NUM ]; then
       make mrproper
     fi;
